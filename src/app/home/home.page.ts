@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @Component({
   selector: 'app-home',
@@ -6,7 +7,49 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  currentDate: string;
+  myTask: string;
+  addTask: boolean;
+  tasks = [];
 
-  constructor() {}
-
+  constructor (
+    public afDB:AngularFireDatabase
+  ) {
+    const date = new Date();
+    const options = { weekday: 'long', month: 'long', day: 'numeric' };
+    this.currentDate = date.toLocaleDateString('fr-FR', options);
+    this.getTasks();
+  }
+  addTaskToFirebase() {
+    this.afDB.list('todolist-24630/').push({
+      text: this.myTask,
+      date: new Date().toISOString(),
+      checked: false
+    });   
+    this.showForm();
+  }
+  showForm(){
+    this.addTask = !this.addTask;
+    this.myTask = '';
+  } 
+  getTasks() {
+    this.afDB.list('todolist-24630/').snapshotChanges(['child_added', 'child_removed']).subscribe(actions => {
+      this.tasks = [];
+      actions.forEach(action => {
+        this.tasks.push({
+          key: action.key,
+          text: action.payload.exportVal().text,
+          hour: action.payload.exportVal().date.substring(11, 16),
+          checked: action.payload.exportVal().checked
+        });
+      });
+    });
+  }
+  changeCheckState(task: any) {
+    console.log('checked: ' + task.checked);
+    this.afDB.object('todolist-24630' + task.key + '/checked/').set(task.checked);
+  }
+  deleteTask(task: any) {
+    this.afDB.list('todolist-24630').remove(task.key);
+  }
 }

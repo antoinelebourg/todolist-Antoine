@@ -4,12 +4,12 @@
 /** Ionic CSS Variables **/
 :root {
   /** primary **/
-  --ion-color-primary: #3880ff;
+  --ion-color-primary: #5a8ca4;
   --ion-color-primary-rgb: 56, 128, 255;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #3171e0;
-  --ion-color-primary-tint: #4c8dff;
+  --ion-color-primary-shade: #4f7c90;
+  --ion-color-primary-tint: #6ba5c0;
 
   /** secondary **/
   --ion-color-secondary: #3dc2ff;
@@ -179,10 +179,10 @@
     --ion-color-step-900: #e6e6e6;
     --ion-color-step-950: #f2f2f2;
 
-    --ion-toolbar-background: #0d0d0d;
+    --ion-toolbar-background: #f1a03d;
 
-    --ion-item-background: #1c1c1c;
-    --ion-item-background-activated: #313131;
+    --ion-item-background: #f0eab9;
+    --ion-item-background-activated: #bfdaf1;
   }
 
 
@@ -192,7 +192,7 @@
    */
 
   .md body {
-    --ion-background-color: #121212;
+    --ion-background-color: #f5ecec;
     --ion-background-color-rgb: 18,18,18;
 
     --ion-text-color: #ffffff;
@@ -220,7 +220,7 @@
     --ion-color-step-900: #e7e7e7;
     --ion-color-step-950: #f3f3f3;
 
-    --ion-item-background: #1A1B1E;
+    --ion-item-background: rgb(113, 208, 243);
   }
 
   ion-title.title-large {
